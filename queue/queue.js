@@ -12,45 +12,47 @@ export class Queue {
     this.items = [];
   }
 
+  // Adicionar elemento na fila
   enqueue(value) {
     this.items.push(value);
   }
 
+  // Remover um elemento da fila
   dequeue() {
+    // Se a fila estiver vazia retornar undefined
     if (this.isEmpty()) return undefined;
     return this.items.shift();
   }
 
-  peak() {
-    if (this.isEmpty()) return undefined;
-    return this.items[this.lowestCount];
-  }
-
+  // Verificar se a fila está vazia
   isEmpty() {
     return this.size() === 0;
   }
 
+  // Retornar tamanho da fila
   size() {
     return this.items.length;
   }
 
+  // Pegar o primeiro elemento da fila
+  peak() {
+    // Se a fila estiver vazia retornar undefined
+    if (this.isEmpty()) return undefined;
+    return this.items[this.lowestCount];
+  }
+
+  // Limpar todos os elementos da fila
   clear() {
     this.items = [];
   }
 }
 
 const queue = new Queue();
-queue.enqueue(5);
-queue.enqueue(4);
+queue.enqueue(1);
+queue.enqueue(2);
 queue.enqueue(3);
 console.log(queue.dequeue());
-console.log(queue.dequeue());
 console.log(queue.size());
-console.log(queue.dequeue());
-console.log(queue.isEmpty());
-queue.enqueue(2);
-queue.enqueue(4);
-queue.enqueue(6);
-console.log(queue);
+console.log(queue.peak());
 queue.clear();
 console.log(queue);
