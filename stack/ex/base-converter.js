@@ -27,13 +27,8 @@ export class Stack {
   }
 
   peak() {
-    if (this.isEmpty()) return undefined;
+    if (!this.isEmpty()) return undefined;
     return this.items[this.count - 1];
-  }
-
-  clear() {
-    this.count = 0;
-    this.items = {};
   }
 
   toString() {
@@ -43,7 +38,6 @@ export class Stack {
     for (let i = 1; i < this.count; i++) {
       objString = `${objString},${this.items[i]}`;
     }
-
     return objString;
   }
 }
@@ -51,8 +45,8 @@ export class Stack {
 function baseConverter(decNumber, base) {
   const remStack = new Stack();
   let number = decNumber;
-  let rem;
   let baseString = "";
+  let rem;
   let digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   if (!(base >= 2 && base <= 36)) {
     return "";
@@ -74,3 +68,4 @@ function baseConverter(decNumber, base) {
 console.log(baseConverter(10, 2));
 console.log(baseConverter(104558615, 8));
 console.log(baseConverter(104558615, 16));
+console.log(baseConverter(104558615, 36));
