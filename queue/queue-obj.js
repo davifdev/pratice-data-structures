@@ -4,7 +4,6 @@
 // [x] - Retornar o tamanho da fila
 // [x] - Limpar todos os dados de uma fila
 // [X] - Listar todos os elementos de uma fila em string
-
 export class Queue {
   constructor() {
     this.lowestCount = 0;
