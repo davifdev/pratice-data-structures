@@ -1,7 +1,6 @@
 const CONSTANTS = {
   DEQUE_IS_EMPTY: "O deque está vazio!",
 };
-
 export class Deque {
   constructor() {
     this.lowestCount = 0;
@@ -76,14 +75,3 @@ export class Deque {
     return objString;
   }
 }
-
-const deque = new Deque();
-deque.addFront(1);
-deque.addFront(2);
-deque.addFront(3);
-console.log(deque.removeFront());
-deque.addFront(3);
-deque.addFront(4);
-console.log(deque.removeBack());
-deque.addBack(5);
-console.log(deque);
