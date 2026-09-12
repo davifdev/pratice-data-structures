@@ -8,37 +8,34 @@ for (let i = 0; i < 3; i++) {
     }
   }
 }
+console.log(matrix3x3x3);
 
-for (let i = 0; i < matrix3x3x3.length; i++) {
-  for (let j = 0; j < matrix3x3x3[i].length; j++) {
-    for (let k = 0; k < matrix3x3x3[i][j]; z++) {
-      console.log(matrix3x3x3[i][j][k]);
-    }
-  }
-}
-
-const matrix3x3x3Fill = [
+const matrix3x3x3fill = [
   [
-    [12, 75, 79, 79, 81, 81],
-    [22, 75, 79, 79, 81, 81],
-    [32, 75, 79, 79, 81, 81],
+    [[1], [2], [3]],
+    [[4], [5], [6]],
+    [[7], [8], [9]],
   ],
   [
-    [41, 79, 75, 75, 73, 73],
-    [51, 79, 75, 75, 73, 73],
-    [61, 79, 75, 75, 73, 73],
+    [[10], [11], [12]],
+    [[13], [14], [15]],
+    [[16], [17], [18]],
   ],
   [
-    [71, 79, 75, 75, 73, 73],
-    [81, 79, 75, 75, 73, 73],
-    [91, 79, 75, 75, 73, 73],
+    [[19], [20], [21]],
+    [[22], [23], [24]],
+    [[25], [26], [27]],
   ],
 ];
 
-for (let i = 0; i < matrix3x3x3Fill.length; i++) {
-  for (let j = 0; j < matrix3x3x3Fill[i].length; j++) {
-    for (let k = 0; k < matrix3x3x3Fill[i][j].length; k++) {
-      console.log(matrix3x3x3Fill[i][j][k]);
+function printMatrix(myMatrix) {
+  for (let i = 0; i < myMatrix.length; i++) {
+    for (let j = 0; j < myMatrix[i].length; j++) {
+      for (let k = 0; k < myMatrix[i][j].length; k++) {
+        console.log(myMatrix[i][j][k]);
+      }
     }
   }
 }
+
+printMatrix(matrix3x3x3fill);

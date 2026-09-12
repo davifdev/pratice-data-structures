@@ -6,43 +6,54 @@
 // [x] - Retornar o tamanho da fila
 // [x] - Limpar todos os elementos de uma fila
 
+const QUEUE_IS_EMPTY = "A fila está vazia!";
 export class Queue {
   constructor() {
     this.lowestCount = 0;
     this.items = [];
   }
 
-  // Adicionar elemento na fila
-  enqueue(value) {
-    this.items.push(value);
+  enqueue(element) {
+    this.items.push(element);
   }
 
-  // Remover um elemento da fila
   dequeue() {
-    // Se a fila estiver vazia retornar undefined
-    if (this.isEmpty()) return undefined;
+    if (this.isEmpty()) return QUEUE_IS_EMPTY;
     return this.items.shift();
   }
 
-  // Verificar se a fila está vazia
   isEmpty() {
     return this.size() === 0;
   }
 
-  // Retornar tamanho da fila
   size() {
     return this.items.length;
   }
 
-  // Pegar o primeiro elemento da fila
   peak() {
-    // Se a fila estiver vazia retornar undefined
-    if (this.isEmpty()) return undefined;
+    if (this.isEmpty()) return QUEUE_IS_EMPTY;
     return this.items[this.lowestCount];
   }
 
-  // Limpar todos os elementos da fila
   clear() {
     this.items = [];
   }
+
+  toString() {
+    if (this.isEmpty()) return QUEUE_IS_EMPTY;
+
+    let objString = this.items[this.lowestCount];
+    for (let i = 1; i < this.items.length; i++) {
+      objString = `${objString},${this.items[i]}`;
+    }
+
+    return objString;
+  }
 }
+
+const queue = new Queue();
+queue.enqueue(5);
+queue.enqueue(3);
+queue.enqueue(2);
+console.log(queue.dequeue());
+console.log(queue.toString());

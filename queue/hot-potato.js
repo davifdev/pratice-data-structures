@@ -1,10 +1,10 @@
-import { Queue } from "./queue.js";
+import { Queue } from "./queue-obj.js";
 
-function hotPotato(elementsList, num) {
+function hotPotato(elementList, num) {
   const queue = new Queue();
   const eliminatedList = [];
-  for (let i = 0; i < elementsList.length; i++) {
-    queue.enqueue(elementsList[i]);
+  for (let i = 0; i < elementList.length; i++) {
+    queue.enqueue(elementList[i]);
   }
 
   while (queue.size() > 1) {
@@ -16,13 +16,13 @@ function hotPotato(elementsList, num) {
 
   return {
     winner: queue.dequeue(),
-    eliminated: eliminatedList,
+    eliminate: eliminatedList,
   };
 }
 
-const names = ["John", "Jane", "Jack", "Lucia", "Trevor", "Luke"];
+const names = ["Jane", "John", "Lucia", "Jason", "Carl", "Ashley"];
 const result = hotPotato(names, 3);
-result.eliminated.forEach((name) => {
-  console.log(`${name} was eliminated from the Hot potato game.`);
+result.eliminate.forEach((name) => {
+  console.log(`${name} was eliminated the hot potato game`);
 });
-console.log(`The winner is: ${result.winner}`);
+console.log(`The winner is ${result.winner}`);

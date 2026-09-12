@@ -1,6 +1,6 @@
 const months = [
   "January",
-  "Fenruary",
+  "February",
   "March",
   "April",
   "May",
@@ -8,27 +8,24 @@ const months = [
   "July",
   "August",
   "September",
-  "October",
+  "Octuber",
   "November",
   "December",
 ];
 
-const averageTemp2021 = [
-  31.9, 35.3, 42.4, 52, 60.8, 33.4, 75.2, 76.8, 70.7, 59.1, 47.3, 36.9,
+const averageTemp = [
+  35.4, 37.8, 29.4, 41.2, 39.9, 36.4, 33.3, 45.4, 33.5, 32.5, 31.4, 43.2,
 ];
 
-const averageTemp2022 = [
-  32.1, 36.2, 43.1, 53.2, 61.5, 34.1, 76.3, 77.9, 71.8, 59.8, 48.0, 37.6,
-];
-
-function getAverageTemperature(averageTemp, year) {
-  console.log(`Average temperature for ${year}:`);
+function getAverageTemp(months, averageTemp) {
   for (let i = 0; i < averageTemp.length; i++) {
-    console.log(`${months[i]} mean temperature: ${averageTemp[i]}`);
+    console.log(
+      `A temperatuda média de ${months[i]} é igual a: ${averageTemp[i]}`,
+    );
   }
 }
 
-getAverageTemperature(averageTemp2021, 2021);
+getAverageTemp(months, averageTemp);
 
 const daysOfWeek = [
   "Sunday",
@@ -40,18 +37,26 @@ const daysOfWeek = [
   "Saturday",
 ];
 
-for (let i = 0; i < daysOfWeek.length; i++) {
-  console.log(`Day ${i + 1}: ${daysOfWeek[i]}`);
+for (let day of daysOfWeek) {
+  console.log(day);
 }
 
-const fibonacci = [];
-fibonacci[1] = 1;
-fibonacci[2] = 1;
+function getFibonacciSequencie(num) {
+  const fibonacciSequencie = [];
+  const fibonacci = [];
+  fibonacci[1] = 1;
+  fibonacci[2] = 1;
 
-for (let i = 3; i <= 20; i++) {
-  fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+  for (let i = 3; i < num; i++) {
+    fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+  }
+
+  for (let i = 1; i < fibonacci.length; i++) {
+    fibonacciSequencie.push(fibonacci[i]);
+  }
+
+  return fibonacciSequencie;
 }
 
-for (let i = 1; i < fibonacci.length; i++) {
-  console.log(`Fibonacci: `, fibonacci[i]);
-}
+const result = getFibonacciSequencie(20);
+console.log(result);

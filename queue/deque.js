@@ -1,6 +1,4 @@
-const CONSTANTS = {
-  DEQUE_IS_EMPTY: "O deque está vazio!",
-};
+const DEQUE_IS_EMPTY = "O Deque está vazio!";
 export class Deque {
   constructor() {
     this.lowestCount = 0;
@@ -31,31 +29,37 @@ export class Deque {
   }
 
   removeFront() {
-    if (this.isEmpty()) return CONSTANTS.DEQUE_IS_EMPTY;
-
+    if (this.isEmpty()) return DEQUE_IS_EMPTY;
     const result = this.items[this.lowestCount];
     delete this.items[this.lowestCount];
     this.lowestCount++;
-
     return result;
   }
 
   removeBack() {
-    if (this.isEmpty()) return CONSTANTS.DEQUE_IS_EMPTY;
-
+    if (this.isEmpty()) return DEQUE_IS_EMPTY;
     this.count--;
     const result = this.items[this.count];
     delete this.items[this.count];
-
     return result;
+  }
+
+  size() {
+    return this.count - this.lowestCount;
   }
 
   isEmpty() {
     return this.size() === 0;
   }
 
-  size() {
-    return this.count - this.lowestCount;
+  peakFront() {
+    if (this.isEmpty()) return DEQUE_IS_EMPTY;
+    return this.items[this.lowestCount];
+  }
+
+  peakBack() {
+    if (this.isEmpty()) return DEQUE_IS_EMPTY;
+    return this.items[this.count - 1];
   }
 
   clear() {
@@ -65,7 +69,7 @@ export class Deque {
   }
 
   toString() {
-    if (this.isEmpty()) return CONSTANTS.DEQUE_IS_EMPTY;
+    if (this.isEmpty()) return DEQUE_IS_EMPTY;
 
     let objString = `${this.items[this.lowestCount]}`;
     for (let i = this.lowestCount + 1; i < this.count; i++) {

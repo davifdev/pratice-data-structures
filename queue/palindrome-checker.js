@@ -1,6 +1,6 @@
 import { Deque } from "./deque.js";
 
-function palindromeChecker(aString) {
+function palindromerChecker(aString) {
   if (aString == null || aString.trim().length === 0) {
     return false;
   }
@@ -14,7 +14,7 @@ function palindromeChecker(aString) {
   let firstChar, lastChar;
   let isEqual = true;
 
-  while (deque.size() > 1) {
+  while (deque.size() > 1 && isEqual) {
     firstChar = deque.removeFront();
     lastChar = deque.removeBack();
     if (firstChar !== lastChar) {
@@ -25,4 +25,4 @@ function palindromeChecker(aString) {
   return isEqual;
 }
 
-console.log("subi no onibus", palindromeChecker("subi no onibus"));
+console.log(palindromerChecker("subi no onibus"));

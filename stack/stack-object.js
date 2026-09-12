@@ -1,24 +1,26 @@
-// [x] - Adicionar um elemento ao topo da pilha.
-// [x] - Remover um elemento ao topo da pilha.
-// [x] - Verificar se a pilha está vazia.
-// [x] - Verificar o tamanho da pilha.
-// [x] - Pegar o elemento que está no topo da pilha.
-// [x] - Limpar todos os dados de uma pilha.
-// [x] - Listar todos os elementos em string.
+// [x] - Adicionar um elemento ao topo da pilha
+// [x] - Remover o elemento do topo da pilha
+// [x] - Retornar o tamanho da pilha
+// [x] - Verificar se a pilha está vazia
+// [x] - Pegar o elemento que está no topo da pilha
+// [x] - Resetar nossa pilha
+// [x] - Listar todos os elementos contidos na pilha
 
+const STACK_IS_EMPTY = "A pilha está vazia";
+// O(1) - Constante
 export class Stack {
   constructor() {
     this.count = 0;
     this.items = {};
   }
 
-  push(value) {
-    this.items[this.count] = value;
+  push(element) {
+    this.items[this.count] = element;
     this.count++;
   }
 
   pop() {
-    if (this.isEmpty()) return undefined;
+    if (this.isEmpty()) return STACK_IS_EMPTY;
 
     this.count--;
     const result = this.items[this.count];
@@ -35,17 +37,17 @@ export class Stack {
   }
 
   peak() {
-    if (this.isEmpty()) return undefined;
+    if (this.isEmpty()) return STACK_IS_EMPTY;
     return this.items[this.count - 1];
   }
 
   clear() {
-    this.items = {};
     this.count = 0;
+    this.items = {};
   }
 
   toString() {
-    if (this.isEmpty()) return "";
+    if (this.isEmpty()) return STACK_IS_EMPTY;
 
     let objString = `${this.items[0]}`;
     for (let i = 1; i < this.count; i++) {
@@ -57,16 +59,6 @@ export class Stack {
 }
 
 const stack = new Stack();
-stack.push(5);
+stack.push(2);
 stack.push(3);
-stack.push(4);
-console.log(stack.pop(4));
-console.log(stack.isEmpty());
-console.log(stack.size());
-console.log(stack.peak());
 console.log(stack.toString());
-stack.clear();
-stack.push(5);
-stack.push(3);
-stack.push(4);
-console.log(stack);
