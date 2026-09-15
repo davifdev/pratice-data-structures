@@ -1,7 +1,6 @@
 import { defaultEquals } from "../utils/index.js";
 import { Node } from "../models/linked-list-models.js";
-
-export default class LinkedList {
+export class LinkedList {
   constructor(equalsFn = defaultEquals) {
     this.count = 0;
     this.equalsFn = equalsFn;
@@ -29,7 +28,7 @@ export default class LinkedList {
       if (index === 0) {
         this.head = current.next;
       } else {
-        const previous = this.getElementAt(index - 1);
+        let previous = this.getElementAt(index - 1);
         current = previous.next;
         previous.next = current.next;
       }
@@ -42,7 +41,7 @@ export default class LinkedList {
   getElementAt(index) {
     if (index >= 0 && index <= this.count) {
       let current = this.head;
-      for (let i = 0; i < index && current != null; i++) {
+      for (let i = 0; i < index; i++) {
         current = current.next;
       }
       return current;
@@ -101,11 +100,11 @@ export default class LinkedList {
     if (this.head == null) {
       return "";
     }
+
     let objString = `${this.head.element}`;
     let current = this.head.next;
-    for (let i = 1; i < this.size() && current != null; i++) {
+    for (let i = 1; i < this.count && current != null; i++) {
       objString = `${objString},${current.element}`;
-      current = current.next;
     }
 
     return objString;
@@ -113,6 +112,7 @@ export default class LinkedList {
 }
 
 const list = new LinkedList();
-list.push(15);
-list.push(10);
-console.log(list);
+list.push(4);
+list.push(3);
+list.push(2);
+console.log(list.indexOf(1));
