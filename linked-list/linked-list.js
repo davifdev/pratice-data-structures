@@ -1,6 +1,14 @@
-import { defaultEquals } from "../utils/index.js";
-import { Node } from "../models/linked-list-models.js";
-export class LinkedList {
+function defaultEquals(a, b) {
+  return a === b;
+}
+
+class Node {
+  constructor(element) {
+    this.element = element;
+    this.next = undefined;
+  }
+}
+class LinkedList {
   constructor(equalsFn = defaultEquals) {
     this.count = 0;
     this.equalsFn = equalsFn;
@@ -39,7 +47,7 @@ export class LinkedList {
   }
 
   getElementAt(index) {
-    if (index >= 0 && index <= this.count) {
+    if (index >= 0 && index < this.count) {
       let current = this.head;
       for (let i = 0; i < index; i++) {
         current = current.next;
@@ -47,6 +55,21 @@ export class LinkedList {
       return current;
     }
     return undefined;
+  }
+
+  indexOf(element) {
+    let current = this.head;
+    for (let i = 0; i < this.count && current != null; i++) {
+      if (this.equalsFn(element, current.element)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  remove(element) {
+    const index = this.indexOf(element);
+    return this.removeAt(index);
   }
 
   insert(element, index) {
@@ -68,32 +91,12 @@ export class LinkedList {
     return false;
   }
 
-  indexOf(element) {
-    let current = this.head;
-    for (let i = 0; i < this.count && current != null; i++) {
-      if (this.equalsFn(element, current.element)) {
-        return i;
-      }
-      current = current.next;
-    }
-    return -1;
-  }
-
-  remove(element) {
-    const index = this.indexOf(element);
-    return this.removeAt(index);
-  }
-
   size() {
     return this.count;
   }
 
   isEmpty() {
     return this.size() === 0;
-  }
-
-  getHead() {
-    return this.head;
   }
 
   toString() {
@@ -103,8 +106,9 @@ export class LinkedList {
 
     let objString = `${this.head.element}`;
     let current = this.head.next;
-    for (let i = 1; i < this.count && current != null; i++) {
+    for (let i = 1; i < this.size() && current != null; i++) {
       objString = `${objString},${current.element}`;
+      current = current.next;
     }
 
     return objString;
@@ -112,7 +116,6 @@ export class LinkedList {
 }
 
 const list = new LinkedList();
-list.push(4);
 list.push(3);
 list.push(2);
-console.log(list.indexOf(1));
+console.log(list.removeAt(1));
