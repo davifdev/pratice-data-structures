@@ -1,14 +1,6 @@
-function defaultEquals(a, b) {
-  return a === b;
-}
-
-class Node {
-  constructor(element) {
-    this.element = element;
-    this.next = undefined;
-  }
-}
-class LinkedList {
+import { defaultEquals } from "../utils/index.js";
+import { Node } from "../models/linked-list-models.js";
+export class LinkedList {
   constructor(equalsFn = defaultEquals) {
     this.count = 0;
     this.equalsFn = equalsFn;
