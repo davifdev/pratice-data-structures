@@ -1,15 +1,15 @@
 import { Node } from "../models/linked-list-models.js";
 import { defaultEquals } from "../utils/index.js";
-import { LinkedList } from "./linked-list.js";
+import { LinkedList } from "../linked-list/linked-list.js";
 
 class DoublyNode extends Node {
-  constructor(element, next, prev) {
-    super(element, next);
-    this.prev = prev;
+  constructor(element) {
+    super(element);
+    this.prev = undefined;
   }
 }
 
-export class DoublyLinkedList extends LinkedList {
+class DoublyLinkedList extends LinkedList {
   constructor(equalsFn = defaultEquals) {
     super(equalsFn);
     this.tail = undefined;
@@ -34,8 +34,8 @@ export class DoublyLinkedList extends LinkedList {
         node.prev = current;
         this.tail = node;
       } else {
-        const previous = this.getElementAt(index - 1); // Prev <- Node -> Current;
-        current = previous.next;
+        const previous = this.getElementAt(index - 1);
+        const current = previous.next;
         node.next = current;
         previous.next = node;
         current.prev = node;
@@ -62,20 +62,11 @@ export class DoublyLinkedList extends LinkedList {
         this.tail = current.prev;
         this.tail.next = undefined;
       } else {
-        current = this.getElementAt(index);
+        const current = this.getElementAt(index);
         const previous = current.prev;
         previous.next = current.next;
         current.next.prev = previous;
       }
-      this.count--;
-      return current.element;
     }
-    return undefined;
   }
 }
-
-const doublyLinked = new DoublyLinkedList();
-doublyLinked.insert(1, 0);
-doublyLinked.insert(2, 1);
-doublyLinked.insert(3, 2);
-console.log(doublyLinked);
