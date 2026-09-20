@@ -1,15 +1,13 @@
 import { Node } from "../models/linked-list-models.js";
 import { defaultEquals } from "../utils/index.js";
 import { LinkedList } from "../linked-list/linked-list.js";
-
-class DoublyNode extends Node {
+export class DoublyNode extends Node {
   constructor(element) {
     super(element);
     this.prev = undefined;
   }
 }
-
-class DoublyLinkedList extends LinkedList {
+export class DoublyLinkedList extends LinkedList {
   constructor(equalsFn = defaultEquals) {
     super(equalsFn);
     this.tail = undefined;

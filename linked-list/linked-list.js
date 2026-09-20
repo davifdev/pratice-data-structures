@@ -106,8 +106,3 @@ export class LinkedList {
     return objString;
   }
 }
-
-const list = new LinkedList();
-list.push(3);
-list.push(2);
-console.log(list.removeAt(1));
