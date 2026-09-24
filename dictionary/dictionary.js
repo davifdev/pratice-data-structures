@@ -1,16 +1,14 @@
 import { defaultToString } from "../utils/index.js";
-
 class ValuePair {
   constructor(key, value) {
     this.key = key;
     this.value = value;
   }
   toString() {
-    return `[#${this.key}: ${this.value}]`;
+    return `#${this.key}: ${this.value}`;
   }
 }
-
-export class Dictionary {
+class Dictionary {
   constructor(toStrFn = defaultToString) {
     this.toStrFn = toStrFn;
     this.table = {};
@@ -37,14 +35,9 @@ export class Dictionary {
     return false;
   }
 
-  get(key) {
-    const valuePair = this.table[this.toStrFn(key)];
-    return valuePair == null ? undefined : valuePair.value;
-  }
-
   keyValues() {
     const valuePairs = [];
-    for (const k in this.table) {
+    for (let k in this.table) {
       if (this.hasKey(k)) {
         valuePairs.push(this.table[k]);
       }
@@ -65,14 +58,9 @@ export class Dictionary {
     return this.keyValues().map((valuePair) => valuePair.value);
   }
 
-  forEach(callbackFn) {
-    const valuePairs = this.keyValues();
-    for (let i = 0; i < valuePairs.length; i++) {
-      const result = callbackFn(valuePairs[i].key, valuePairs[i].value);
-      if (result === false) {
-        break;
-      }
-    }
+  get(key) {
+    const valuePair = this.table[this.toStrFn(key)];
+    return valuePair == null ? "" : valuePair.value;
   }
 
   size() {
@@ -87,10 +75,21 @@ export class Dictionary {
     this.table = {};
   }
 
+  forEach(callback) {
+    const valuePairs = this.keyValues();
+    for (let i = 0; i < valuePairs.length; i++) {
+      const result = callback(valuePairs[i].key, valuePairs[i].value);
+      if (result === false) {
+        break;
+      }
+    }
+  }
+
   toString() {
     if (this.isEmpty()) {
       return "";
     }
+
     const valuePairs = this.keyValues();
     let objString = `${valuePairs[0].toString()}`;
     for (let i = 1; i < valuePairs.length; i++) {
@@ -100,6 +99,10 @@ export class Dictionary {
   }
 }
 
-const map = new Dictionary();
-map.set(15, "Ana");
-console.log(map.keys());
+const dictionary = new Dictionary();
+dictionary.set("Gandalf", "gandalf@email.com");
+dictionary.set("John", "johnsnow@email.com");
+dictionary.set("Tyrion", "tyrion@email.com");
+dictionary.forEach((k, v) => {
+  console.log("forEach: ", `key: ${k}, value: ${v}`);
+});
