@@ -17,21 +17,17 @@ class HashTableLinearProbing {
     this.table = {};
   }
 
-  loseloseHashCode(key) {
-    if (typeof key === "number" && key) {
-      return key;
-    }
-
+  djb2HashCode(key) {
     const tableKey = this.toStrFn(key);
-    let hash = 0;
+    let hash = 5381;
     for (let i = 0; i < tableKey.length; i++) {
-      hash += tableKey.charAt(i);
+      hash = hash * 33 + tableKey.charCodeAt(i);
     }
-    return hash % 37;
+    return hash % 1017;
   }
 
   hashCode(key) {
-    return this.loseloseHashCode(key);
+    return this.djb2HashCode(key);
   }
 
   put(key, value) {
@@ -101,3 +97,17 @@ class HashTableLinearProbing {
     }
   }
 }
+
+const hash = new HashTableLinearProbing();
+hash.put("Ygritte", "ygritte@gmail.com");
+hash.put("Jonathan", "jonathan@gmail.com");
+hash.put("Jamie", "jamie@gmail.com");
+hash.put("Jack", "jack@gmail.com");
+hash.put("Jasmine", "jasmine@gmail.com");
+hash.put("Jake", "jake@gmail.com");
+hash.put("Nathan", "nathan@gmail.com");
+hash.put("Athelstan", "athelstan@gmail.com");
+hash.put("Sue", "sue@gmail.com");
+hash.put("Aethelwulf", "aethelwulf@gmail.com");
+hash.put("Sargeras", "sargeras@gmail.com");
+console.log(hash);
