@@ -91,6 +91,10 @@ export class LinkedList {
     return this.size() === 0;
   }
 
+  getHead() {
+    return this.head;
+  }
+
   toString() {
     if (this.head == null) {
       return "";
