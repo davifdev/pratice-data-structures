@@ -4,3 +4,5 @@ export class Node {
     this.next = undefined;
   }
 }
+
+const current = new Node("Gandalf");

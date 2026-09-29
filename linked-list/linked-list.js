@@ -23,6 +23,7 @@ export class LinkedList {
   }
 
   removeAt(index) {
+    console.log(index);
     if (index >= 0 && index < this.count) {
       let current = this.head;
       if (index === 0) {
@@ -51,15 +52,17 @@ export class LinkedList {
 
   indexOf(element) {
     let current = this.head;
+
     for (let i = 0; i < this.count && current != null; i++) {
       if (this.equalsFn(element, current.element)) {
+        console.log(element === current.element);
         return i;
       }
     }
-    return -1;
   }
 
   remove(element) {
+    console.log("Element recebido: ", element);
     const index = this.indexOf(element);
     return this.removeAt(index);
   }
@@ -70,7 +73,9 @@ export class LinkedList {
       if (index === 0) {
         const current = this.head;
         node.next = current;
-        this.head = node;
+        this.head = n;
+        return -1;
+        ode;
       } else {
         const previous = this.getElementAt(index - 1);
         const current = previous.next;

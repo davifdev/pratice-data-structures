@@ -1,17 +1,15 @@
 import { LinkedList } from "../linked-list/linked-list.js";
-
+import { defaultToString } from "../utils/index.js";
 class ValuePair {
   constructor(key, value) {
     this.key = key;
     this.value = value;
   }
-
   toString() {
-    return `[#${this.key}: ${this.value}]`;
+    return `[#${this.key} => ${this.value}]`;
   }
 }
-
-class HashTableSeparateChaining {
+export class HashTableSeparateChaining {
   constructor(toStrFn = defaultToString) {
     this.toStrFn = toStrFn;
     this.table = {};
@@ -25,7 +23,7 @@ class HashTableSeparateChaining {
     const tableKey = this.toStrFn(key);
     let hash = 0;
     for (let i = 0; i < tableKey.length; i++) {
-      hash += tableKey.charAt(i);
+      hash += tableKey.charCodeAt(i);
     }
     return hash % 37;
   }
@@ -35,13 +33,15 @@ class HashTableSeparateChaining {
   }
 
   put(key, value) {
-    if ((key != null) & (value != null)) {
+    if (key != null && key != value) {
       const position = this.hashCode(key);
       if (this.table[position] == null) {
         this.table[position] = new LinkedList();
       }
       this.table[position].push(new ValuePair(key, value));
+      return true;
     }
+    return false;
   }
 
   get(key) {
@@ -66,15 +66,22 @@ class HashTableSeparateChaining {
       let current = linkedList.getHead();
       while (current != null) {
         if (current.element.key === key) {
+          console.log("Current Element: ", current.element);
           linkedList.remove(current.element);
           if (linkedList.isEmpty()) {
             delete this.table[position];
           }
           return true;
         }
-        current = current.next;
       }
+      current = current.next;
     }
     return false;
   }
 }
+
+const hash = new HashTableSeparateChaining();
+hash.put("Gandalf", "gandalf@gmail.com");
+hash.put("Tyrion", "tyrion@gmail.com");
+hash.put("Frodo", "frodo@gmail.com");
+console.log(hash);
