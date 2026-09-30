@@ -66,7 +66,6 @@ export class HashTableSeparateChaining {
       let current = linkedList.getHead();
       while (current != null) {
         if (current.element.key === key) {
-          console.log("Current Element: ", current.element);
           linkedList.remove(current.element);
           if (linkedList.isEmpty()) {
             delete this.table[position];

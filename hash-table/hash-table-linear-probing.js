@@ -1,17 +1,14 @@
 import { defaultToString } from "../utils/index.js";
-
 class ValuePair {
   constructor(key, value) {
     this.key = key;
     this.value = value;
   }
-
   toString() {
-    return `[#${this.key}: ${this.value}]`;
+    return `[#${this.key} => ${this.value}]`;
   }
 }
-
-class HashTableLinearProbing {
+export class HashTableLinearProbing {
   constructor(toStrFn = defaultToString) {
     this.toStrFn = toStrFn;
     this.table = {};
@@ -50,14 +47,16 @@ class HashTableLinearProbing {
   get(key) {
     const position = this.hashCode(key);
     if (this.table[position] != null) {
-      return this.table[position].value;
-    }
-    let index = position + 1;
-    while (this.table[index] != null && this.table[index].key !== key) {
-      index++;
-    }
-    if (this.table[index] != null && this.table[index].key === key) {
-      return this.table[position].value;
+      if (this.table[position].key === key) {
+        return this.table[position].value;
+      }
+      let index = position + 1;
+      while (this.table[index] != null && this.table[index].key !== key) {
+        index++;
+      }
+      if (this.table[index] != null && this.table[index].key === key) {
+        return this.table[index].value;
+      }
     }
     return undefined;
   }
@@ -75,12 +74,12 @@ class HashTableLinearProbing {
         index++;
       }
       if (this.table[index] != null && this.table[index].key === key) {
-        delete this.table[index];
-        this.verifyRemoveSideEffect(key, index);
+        delete this.table[position];
+        this.verifyRemoveSideEffect(key, position);
         return true;
       }
-      return false;
     }
+    return false;
   }
 
   verifyRemoveSideEffect(key, removedPosition) {
@@ -88,7 +87,7 @@ class HashTableLinearProbing {
     let index = removedPosition + 1;
     while (this.table[index] != null) {
       const posHash = this.hashCode(this.table[index].key);
-      if (posHash <= hash || posHash <= removedPosition) {
+      if (posHash <= hash && posHash <= removedPosition) {
         this.table[removedPosition] = this.table[index];
         delete this.table[index];
         removedPosition = index;
@@ -99,15 +98,8 @@ class HashTableLinearProbing {
 }
 
 const hash = new HashTableLinearProbing();
-hash.put("Ygritte", "ygritte@gmail.com");
-hash.put("Jonathan", "jonathan@gmail.com");
-hash.put("Jamie", "jamie@gmail.com");
-hash.put("Jack", "jack@gmail.com");
-hash.put("Jasmine", "jasmine@gmail.com");
-hash.put("Jake", "jake@gmail.com");
-hash.put("Nathan", "nathan@gmail.com");
-hash.put("Athelstan", "athelstan@gmail.com");
-hash.put("Sue", "sue@gmail.com");
-hash.put("Aethelwulf", "aethelwulf@gmail.com");
-hash.put("Sargeras", "sargeras@gmail.com");
-console.log(hash);
+hash.put("Gandalf", "gandalf@gmail.com");
+hash.put("Davi", "davi@gmail.com");
+hash.put("Tyrion", "tyrion@gmail.com");
+hash.put("Frodo", "frodo@gmail.com");
+console.log(hash.get("Frodo"));
